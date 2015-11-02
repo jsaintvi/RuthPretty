@@ -1,0 +1,27 @@
+<% if !flash[:notice].blank? %>
+    <div class="alert alert-info">
+      <%= flash[:notice] %>
+    </div>
+<% end %>
+<br />
+<%= link_to "New Resume", new_resume_path, class: "btn btn-primary" %>
+<br />
+<br />
+<table class="table table-bordered table-striped">
+  <thead>
+  <tr>
+    <th style="background-color: black">Name</th>
+    <th style="background-color: black;">Download Link</th>
+    <th style="background-color: black">Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @resumes.each do |resume| %>
+      <tr>
+        <td style="color: blue"><%= resume.name %></td>
+        <td style="color: blue"><%= link_to "Download Resume", resume.attachment_url %></td>
+        <td><%= button_to "Delete",  resume, method: :delete, class: "btn btn-danger", confirm: "Are you sure that you wish to delete #{resume.name}?" %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
